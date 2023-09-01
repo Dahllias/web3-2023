@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +7,41 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
-
 <body>
-    <?php
-    $nom = $lien = $type = $date = "";
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$db = "bdtest";
+
+$conn = new mysqli($servername, $username, $password, $db);
+
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
+
+if(isset($_GET["id"])){
+    $id=$_GET["id"];
+    $sql="SELECT * FROM jeuxvideo WHERE id=$id";
+    $result = $conn->query($sql);
+
+    if($result->num_rows>0){
+        $row=$result->fetch_assoc();
+    }
+    $nom = $row["nom"];
+    $type = $row["type"];
+    $date = $row["date"];
+    $lien = $row["url"];
+}
+elseif(isset($_POST["id"])){
+    $id=$_POST["id"];
+    
+}
+else{
+    $erreur = true;
+}
+
 
     $nomErr = $lienErr = $typeErr = $dateErr = "";
 
@@ -51,27 +81,16 @@
 
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$db = "bdtest";
 
-$conn = new mysqli($servername, $username, $password, $db);
-
-if ($conn->connect_error) {
-    die("Connection Failed: " . $conn->connect_error);
-}
-
-
-$sql = "INSERT INTO jeuxvideo (id, nom, type, date, url)
+$sql = "UPDATE jeuxvideo (id, nom, type, date, url)
             VALUES (NULL" . ",'" . $_POST['nom'] . "','" . $_POST['type'] . "','" . $_POST['date'] . "','" . $_POST['lien'] . "')";
+
 
 if(mysqli_query($conn, $sql)){
     echo "Réussi";
 }else{
     echo "Error: ". $sql . "<br>".mysqli_error($conn);
 }
-header("location:index.php");
 mysqli_close($conn);
 ?>
 
@@ -86,22 +105,22 @@ mysqli_close($conn);
         <form class="row" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nom</label>
-                <input type="name" class="form-control" id="exampleInputName1" name="nom">
+                <input type="name" class="form-control" id="exampleInputName1" name="nom" placeholder="<?php echo "$nom" ?>">
                 <span><?php echo $nomErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputLink1" class="form-label">Lien vers une image du jeu </label>
-                <input type="url" class="form-control" id="exampleInputLink1" name="lien">
+                <input type="url" class="form-control" id="exampleInputLink1" name="lien" placeholder="<?php echo "$lien" ?>">
                 <span><?php echo $lienErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Type de jeu</label>
-                <input type="name" class="form-control" id="exampleInputPassword1" name="type">
+                <input type="name" class="form-control" id="exampleInputPassword1" name="type" placeholder="<?php echo "$type" ?>">
                 <span><?php echo $typeErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputDate1" class="form-label">Date de sortie</label>
-                <input type="date" class="form-control" id="exampleInputDate1" name="date">
+                <input type="date" class="form-control" id="exampleInputDate1" name="date" placeholder="<?php echo "$date" ?>">
                 <span><?php echo $dateErr ?></span>
             </div>
 
@@ -125,5 +144,4 @@ mysqli_close($conn);
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 </html>
