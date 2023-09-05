@@ -71,7 +71,7 @@ if(mysqli_query($conn, $sql)){
 }else{
     echo "Error: ". $sql . "<br>".mysqli_error($conn);
 }
-header("location:index.php");
+header("location:index.php?action=ajouter");
 mysqli_close($conn);
 ?>
 

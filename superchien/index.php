@@ -13,6 +13,7 @@
 <body>
 <!-- echo "id: " . $row["id"] . " - Nom: " . $row["nom"] . " - Type " . $row["type"] . " - Date de sortie " . $row["date"] . " - url " . $row["url"] . "<br>";-->
     <?php
+
     $servername = "localhost";
     $username = "root";
     $password = "root";
@@ -65,11 +66,31 @@
         } else {
             echo "0 results";
         }
-
+        
         $conn->close();
         ?>
     </table>
     <a href="ajouter.php" class="btn btn-primary">Ajouter Données</a>
+    <?php
+    if($_GET['action']=="modifier")
+    {
+        echo '<script language="javascript">';
+        echo 'alert("Champ modifié")';
+        echo '</script>';
+    }
+    if($_GET['action']=="ajouter")
+    {
+        echo '<script language="javascript">';
+        echo 'alert("Champ ajouté")';
+        echo '</script>';
+    }
+    if($_GET['action']=="supprimer")
+    {
+        echo '<script language="javascript">';
+        echo 'alert("Champ supprimé")';
+        echo '</script>';
+    }
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
