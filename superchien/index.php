@@ -39,6 +39,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Date</th>
                 <th scope="col">Image</th>
+                <th scope="col">Paramètres</th>
             </tr>
         </thead>
         <?php
@@ -51,7 +52,7 @@
                     <td><?php echo $row["nom"]?></td>
                     <td><?php echo $row["type"]?></td>
                     <td><?php echo $row["date"]?></td>
-                    <td><img src="<?php echo $row["url"]?>" alt=""></td>
+                    <td><img src="<?php echo $row["url"]?>" alt="" class="test"></td>
                     <td class="buttonvert">
                         <a href="supprimer.php?id=<?php echo $row["id"] ?>" class="btn btn-danger maxh" type="button">Effacer</a>
                         <br/>

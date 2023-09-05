@@ -81,9 +81,16 @@ else{
 
 
 <?php
+$sqlid = $_POST["id"];
+$sqlnom = $_POST["nom"];
+$sqltype = $_POST["type"];
+$sqldate = $_POST["date"];
+$sqllien = $_POST["lien"];
 
-$sql = "UPDATE jeuxvideo (id, nom, type, date, url)
-            VALUES (NULL" . ",'" . $_POST['nom'] . "','" . $_POST['type'] . "','" . $_POST['date'] . "','" . $_POST['lien'] . "')";
+
+$sql = "UPDATE jeuxvideo
+SET nom = '$sqlnom', type = '$sqltype', date = '$sqldate', url = '$sqllien'
+WHERE id = '$sqlid'";
 
 
 if(mysqli_query($conn, $sql)){
@@ -91,6 +98,7 @@ if(mysqli_query($conn, $sql)){
 }else{
     echo "Error: ". $sql . "<br>".mysqli_error($conn);
 }
+header("location:index.php");
 mysqli_close($conn);
 ?>
 
@@ -105,28 +113,31 @@ mysqli_close($conn);
         <form class="row" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nom</label>
-                <input type="name" class="form-control" id="exampleInputName1" name="nom" placeholder="<?php echo "$nom" ?>">
+                <input type="name" class="form-control" id="exampleInputName1" name="nom" value="<?php echo "$nom" ?>">
                 <span><?php echo $nomErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputLink1" class="form-label">Lien vers une image du jeu </label>
-                <input type="url" class="form-control" id="exampleInputLink1" name="lien" placeholder="<?php echo "$lien" ?>">
+                <input type="url" class="form-control" id="exampleInputLink1" name="lien" value="<?php echo "$lien" ?>">
                 <span><?php echo $lienErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Type de jeu</label>
-                <input type="name" class="form-control" id="exampleInputPassword1" name="type" placeholder="<?php echo "$type" ?>">
+                <input type="name" class="form-control" id="exampleInputPassword1" name="type" value="<?php echo "$type" ?>">
                 <span><?php echo $typeErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputDate1" class="form-label">Date de sortie</label>
-                <input type="date" class="form-control" id="exampleInputDate1" name="date" placeholder="<?php echo "$date" ?>">
+                <input type="date" class="form-control" id="exampleInputDate1" name="date" value="<?php echo "$date" ?>">
                 <span><?php echo $dateErr ?></span>
             </div>
 
             <div class="col-md-6 mb-3">
                 <button type="submit" class="btn btn-primary" >Submit</button>
                 <a class="btn btn-primary" href="index.php">Revenir</a>
+            </div>
+            <div class="mb-3 test">
+            <input type="hidden" class="form-control field left" name="id" value="<?php echo $id; ?>" readonly>
             </div>
         </form>
 
