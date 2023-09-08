@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,22 +118,22 @@ mysqli_close($conn);
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nom</label>
                 <input type="name" class="form-control" id="exampleInputName1" name="nom" value="<?php echo "$nom" ?>">
-                <span><?php echo $nomErr ?></span>
+                <span style="color:red"><?php echo $nomErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputLink1" class="form-label">Lien vers une image du jeu </label>
                 <input type="url" class="form-control" id="exampleInputLink1" name="lien" value="<?php echo "$lien" ?>">
-                <span><?php echo $lienErr ?></span>
+                <span style="color:red"><?php echo $lienErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Type de jeu</label>
                 <input type="name" class="form-control" id="exampleInputPassword1" name="type" value="<?php echo "$type" ?>">
-                <span><?php echo $typeErr ?></span>
+                <span style="color:red"><?php echo $typeErr ?></span>
             </div>
             <div class="mb-3">
                 <label for="exampleInputDate1" class="form-label">Date de sortie</label>
                 <input type="date" class="form-control" id="exampleInputDate1" name="date" value="<?php echo "$date" ?>">
-                <span><?php echo $dateErr ?></span>
+                <span style="color:red"><?php echo $dateErr ?></span>
             </div>
 
             <div class="col-md-6 mb-3">

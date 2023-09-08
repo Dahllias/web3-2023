@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +74,9 @@
         ?>
     </table>
     <a href="ajouter.php" class="btn btn-primary">Ajouter Données</a>
+    <a href="deconnexion.php" class="btn btn-primary" >Déconnexion</a>
     <?php
+    /*
     if($_GET['action']=="modifier")
     {
         echo '<script language="javascript">';
@@ -90,6 +95,7 @@
         echo 'alert("Champ supprimé")';
         echo '</script>';
     }
+    */
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
